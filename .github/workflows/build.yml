@@ -8,13 +8,14 @@ jobs:
     steps:
       - name: Install Dependencies
         run: |
-          apt install -y \
+          sudo apt update
+          sudo apt install -y \
             wget \
             build-essential \
             pandoc \
             latexmk \
             texlive-fonts-recommended \
-          apt install -y texlive-latex-extra --no-install-recommends
+          sudo apt install -y texlive-latex-extra --no-install-recommends
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Checkout submodules
