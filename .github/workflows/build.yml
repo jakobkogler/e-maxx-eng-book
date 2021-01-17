@@ -1,0 +1,29 @@
+name: Build PDF
+
+on: [push]
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Install Dependencies
+        run: |
+          apt update
+          apt install -y \
+            wget \
+            build-essential \
+            pandoc \
+            latexmk \
+            texlive-fonts-recommended \
+          apt install -y texlive-latex-extra --no-install-recommends
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Checkout submodules
+        run: |
+          git submodule update --init --recursive
+      - name: Upload PDF
+        uses: actions/upload-artifact@v2
+        with:
+          name: e-maxx.pdf
+          path: |
+            e-maxx.pdf
