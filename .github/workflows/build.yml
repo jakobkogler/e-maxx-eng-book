@@ -14,13 +14,17 @@ jobs:
             build-essential \
             pandoc \
             latexmk \
-            texlive-fonts-recommended \
+            texlive-fonts-recommended
           sudo apt install -y texlive-latex-extra --no-install-recommends
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Checkout submodules
         run: |
           git submodule update --init --recursive
+      - name: Build PDF
+        run: |
+          bash misc/imgfetch.sh
+          make
       - name: Upload PDF
         uses: actions/upload-artifact@v2
         with:
